@@ -1,0 +1,29 @@
+#import { 
+  Query,
+  Request,
+  Header,
+  UrlParam,
+  Response,
+ } into Http from "w3://ens/http.web3api.eth"
+
+
+"""
+Type holding historical ethereum gas price for a given day.
+"""
+type HistoricalEthereumGasPrice {
+  """
+    Date in m/d/yyyy format. E.g 3/29/2022, 12/20/2021
+  """
+  date : String!
+  """
+    Average ethereum gas price on this day. Unit is WEI.
+  """
+  gasPriceInWei : BigInt!
+}
+
+type Query {
+  """
+    This query returns ethereum gas price details for given date.
+  """
+  getGasData(date: String!) :  HistoricalEthereumGasPrice,
+}
