@@ -451,10 +451,10 @@ export async function getNative(client: PolywrapClient, uri: string, chainId: Ch
  return invocation.data!;
 }
 
-export async function getWETH(client: PolywrapClient, uri: string, chainId: ChainId): Promise<Token> {
+export async function getWrappedNative(client: PolywrapClient, uri: string, chainId: ChainId): Promise<Token> {
  const invocation = await client.invoke<Token>({
    uri: uri,
-   method: "getWETH",
+   method: "getWrappedNative",
    args: {
      chainId: typeof chainId === "string" ? chainId : ChainIdEnum[chainId],
    },

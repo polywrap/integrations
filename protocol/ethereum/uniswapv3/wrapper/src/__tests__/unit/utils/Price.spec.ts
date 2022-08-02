@@ -1,7 +1,7 @@
 import { ChainId, Token } from "../../../wrap";
 import { Price } from "../../../utils";
 import { BigInt } from "@polywrap/wasm-as";
-import { _getWETH } from "../../../token";
+import { getWrappedNative } from "../../../token";
 
 const USDC: Token = {
   chainId: ChainId.MAINNET,
@@ -37,7 +37,7 @@ describe('Price', () => {
     const throws = (): void => {
       const price: Price = new Price(USDC, DAI, BigInt.fromUInt16(100), BigInt.fromUInt16(50));
       price.quote({
-        token: _getWETH(ChainId.MAINNET),
+        token: getWrappedNative({ chainId: ChainId.MAINNET }),
         amount: BigInt.fromUInt16(100),
       });
     }

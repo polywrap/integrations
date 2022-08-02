@@ -1,5 +1,5 @@
 import {
-  ChainId,
+  ChainId, Currency,
   FeeAmount, Fraction,
   Pool,
   Price as PriceType,
@@ -9,7 +9,7 @@ import {
   TradeSwap,
   TradeType
 } from "../../../wrap";
-import { ETHER, _getWETH } from "../../../token";
+import { getWrappedNative } from "../../../token";
 import {
   bestTradeExactIn,
   bestTradeExactOut,
@@ -29,6 +29,11 @@ import {
 import { BigInt, BigNumber, Option } from "@polywrap/wasm-as";
 import { _feeAmountToTickSpacing, _MAX_TICK, _MIN_TICK, Price } from "../../../utils";
 
+const ETHER: Currency = {
+  decimals: 18,
+  name: "Ether",
+  symbol: "ETH",
+};
 
 const getTestToken = (i: i32): Token => {
   return {
@@ -102,15 +107,15 @@ const pool_1_3: Pool = v2StylePool(
   { token: token3, amount: BigInt.fromUInt32(130000) }
 );
 const pool_weth_0: Pool = v2StylePool(
-  { token: _getWETH(ChainId.MAINNET), amount: BigInt.fromUInt32(100000) },
+  { token: getWrappedNative({ chainId: ChainId.MAINNET }), amount: BigInt.fromUInt32(100000) },
   { token: token0, amount: BigInt.fromUInt32(100000) }
 );
 const pool_weth_1: Pool = v2StylePool(
-  { token: _getWETH(ChainId.MAINNET), amount: BigInt.fromUInt32(100000) },
+  { token: getWrappedNative({ chainId: ChainId.MAINNET }), amount: BigInt.fromUInt32(100000) },
   { token: token1, amount: BigInt.fromUInt32(100000) }
 );
 const pool_weth_2: Pool = v2StylePool(
-  { token: _getWETH(ChainId.MAINNET), amount: BigInt.fromUInt32(100000) },
+  { token: getWrappedNative({ chainId: ChainId.MAINNET }), amount: BigInt.fromUInt32(100000) },
   { token: token2, amount: BigInt.fromUInt32(100000) }
 );
 
@@ -959,10 +964,10 @@ describe('Trade', () => {
       });
       expect(result).toHaveLength(2);
       expect(result[0].inputAmount.token.currency).toStrictEqual(ETHER);
-      expect(result[0].swaps[0].route.path).toStrictEqual([_getWETH(ChainId.MAINNET), token0, token1, token3]);
+      expect(result[0].swaps[0].route.path).toStrictEqual([getWrappedNative({ chainId: ChainId.MAINNET }), token0, token1, token3]);
       expect(result[0].outputAmount.token).toStrictEqual(token3);
       expect(result[1].inputAmount.token.currency).toStrictEqual(ETHER);
-      expect(result[1].swaps[0].route.path).toStrictEqual([_getWETH(ChainId.MAINNET), token0, token3]);
+      expect(result[1].swaps[0].route.path).toStrictEqual([getWrappedNative({ chainId: ChainId.MAINNET }), token0, token3]);
       expect(result[1].outputAmount.token).toStrictEqual(token3);
     });
 
@@ -978,10 +983,10 @@ describe('Trade', () => {
       });
       expect(result).toHaveLength(2);
       expect(result[0].inputAmount.token).toStrictEqual(token3);
-      expect(result[0].swaps[0].route.path).toStrictEqual([token3, token0, _getWETH(ChainId.MAINNET)]);
+      expect(result[0].swaps[0].route.path).toStrictEqual([token3, token0, getWrappedNative({ chainId: ChainId.MAINNET })]);
       expect(result[0].outputAmount.token.currency).toStrictEqual(ETHER);
       expect(result[1].inputAmount.token).toStrictEqual(token3);
-      expect(result[1].swaps[0].route.path).toStrictEqual([token3, token1, token0, _getWETH(ChainId.MAINNET)]);
+      expect(result[1].swaps[0].route.path).toStrictEqual([token3, token1, token0, getWrappedNative({ chainId: ChainId.MAINNET })]);
       expect(result[1].outputAmount.token.currency).toStrictEqual(ETHER);
     });
   });
@@ -1317,10 +1322,10 @@ describe('Trade', () => {
       });
       expect(result).toHaveLength(2);
       expect(result[0].inputAmount.token.currency).toStrictEqual(ETHER);
-      expect(result[0].swaps[0].route.path).toStrictEqual([_getWETH(ChainId.MAINNET), token0, token1, token3]);
+      expect(result[0].swaps[0].route.path).toStrictEqual([getWrappedNative({ chainId: ChainId.MAINNET }), token0, token1, token3]);
       expect(result[0].outputAmount.token).toStrictEqual(token3);
       expect(result[1].inputAmount.token.currency).toStrictEqual(ETHER);
-      expect(result[1].swaps[0].route.path).toStrictEqual([_getWETH(ChainId.MAINNET), token0, token3]);
+      expect(result[1].swaps[0].route.path).toStrictEqual([getWrappedNative({ chainId: ChainId.MAINNET }), token0, token3]);
       expect(result[1].outputAmount.token).toStrictEqual(token3);
     });
 
@@ -1336,10 +1341,10 @@ describe('Trade', () => {
       });
       expect(result).toHaveLength(2);
       expect(result[0].inputAmount.token).toStrictEqual(token3);
-      expect(result[0].swaps[0].route.path).toStrictEqual([token3, token0, _getWETH(ChainId.MAINNET)]);
+      expect(result[0].swaps[0].route.path).toStrictEqual([token3, token0, getWrappedNative({ chainId: ChainId.MAINNET })]);
       expect(result[0].outputAmount.token.currency).toStrictEqual(ETHER);
       expect(result[1].inputAmount.token).toStrictEqual(token3);
-      expect(result[1].swaps[0].route.path).toStrictEqual([token3, token1, token0, _getWETH(ChainId.MAINNET)]);
+      expect(result[1].swaps[0].route.path).toStrictEqual([token3, token1, token0, getWrappedNative({ chainId: ChainId.MAINNET })]);
       expect(result[1].outputAmount.token.currency).toStrictEqual(ETHER);
     });
   });

@@ -1,5 +1,5 @@
-import { ETHER, _getWETH } from "../../../token";
-import { ChainId, FeeAmount, Pool, Price, Route, Token } from "../../../wrap";
+import { getWrappedNative } from "../../../token";
+import { ChainId, Currency, FeeAmount, Pool, Price, Route, Token } from "../../../wrap";
 import {
   createPool,
   encodeSqrtRatioX96,
@@ -9,6 +9,12 @@ import {
   routeMidPrice,
 } from "../../..";
 import { BigInt, BigNumber } from "@polywrap/wasm-as";
+
+const ETHER: Currency = {
+  decimals: 18,
+  name: "Ether",
+  symbol: "ETH",
+};
 
 const getTestToken = (i: i32): Token => {
   return {
@@ -40,7 +46,7 @@ const eth: Token = {
   address: "",
   currency: ETHER,
 };
-const weth: Token = _getWETH(ChainId.MAINNET);
+const weth: Token = getWrappedNative({ chainId: ChainId.MAINNET });
 const token0: Token = getTestToken(0);
 const token1: Token = getTestToken(1);
 const token2: Token = getTestToken(2);

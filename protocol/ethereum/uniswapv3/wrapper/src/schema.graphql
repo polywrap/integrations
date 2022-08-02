@@ -119,8 +119,8 @@ type Module {
         chainId: ChainId!
     ): Token!
 
-    """Returns a Wrapped Ether token on the specified chain"""
-    getWETH(
+    """Returns a wrapped native token (WETH or WMATIC) on the specified chain"""
+    getWrappedNative(
         chainId: ChainId!
     ): Token!
 

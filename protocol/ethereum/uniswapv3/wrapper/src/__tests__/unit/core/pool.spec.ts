@@ -1,6 +1,6 @@
 import { BigInt, BigNumber } from "@polywrap/wasm-as";
 import { ChainId, FeeAmount, Pool, PoolChangeResult, Price, Token, TokenAmount } from "../../../wrap";
-import { _getWETH } from "../../../token";
+import { getWrappedNative } from "../../../token";
 import {
   createPool,
   encodeSqrtRatioX96, getPoolInputAmount, getPoolOutputAmount,
@@ -46,7 +46,7 @@ describe('Pool', () => {
       const error = (): void => {
         createPool({
           tokenA: USDC,
-          tokenB: _getWETH(ChainId.ROPSTEN),
+          tokenB: getWrappedNative({ chainId: ChainId.ROPSTEN }),
           fee: FeeAmount.MEDIUM,
           sqrtRatioX96: encodeSqrtRatioX96({ amount1: BigInt.ONE, amount0: BigInt.ONE }),
           liquidity: BigInt.ZERO,
@@ -76,7 +76,7 @@ describe('Pool', () => {
       const error = (): void => {
         createPool({
           tokenA: USDC,
-          tokenB: _getWETH(ChainId.MAINNET),
+          tokenB: getWrappedNative({ chainId: ChainId.MAINNET }),
           fee: FeeAmount.MEDIUM,
           sqrtRatioX96: encodeSqrtRatioX96({ amount1: BigInt.ONE, amount0: BigInt.ONE }),
           liquidity: BigInt.ZERO,
@@ -89,7 +89,7 @@ describe('Pool', () => {
       const errorNeg = (): void => {
         createPool({
           tokenA: USDC,
-          tokenB: _getWETH(ChainId.MAINNET),
+          tokenB: getWrappedNative({ chainId: ChainId.MAINNET }),
           fee: FeeAmount.MEDIUM,
           sqrtRatioX96: encodeSqrtRatioX96({ amount1: BigInt.ONE, amount0: BigInt.ONE }).addInt(1),
           liquidity: BigInt.ZERO,
@@ -104,7 +104,7 @@ describe('Pool', () => {
       const noError = (): void => {
         createPool({
           tokenA: USDC,
-          tokenB: _getWETH(ChainId.MAINNET),
+          tokenB: getWrappedNative({ chainId: ChainId.MAINNET }),
           fee: FeeAmount.MEDIUM,
           sqrtRatioX96: encodeSqrtRatioX96({ amount1: BigInt.ONE, amount0: BigInt.ONE }),
           liquidity: BigInt.ZERO,
@@ -119,7 +119,7 @@ describe('Pool', () => {
       const noError = (): void => {
         createPool({
           tokenA: USDC,
-          tokenB: _getWETH(ChainId.MAINNET),
+          tokenB: getWrappedNative({ chainId: ChainId.MAINNET }),
           fee: FeeAmount.LOW,
           sqrtRatioX96: encodeSqrtRatioX96({ amount1: BigInt.ONE, amount0: BigInt.ONE }),
           liquidity: BigInt.ZERO,
@@ -134,7 +134,7 @@ describe('Pool', () => {
       const noError = (): void => {
         createPool({
           tokenA: USDC,
-          tokenB: _getWETH(ChainId.MAINNET),
+          tokenB: getWrappedNative({ chainId: ChainId.MAINNET }),
           fee: FeeAmount.LOWEST,
           sqrtRatioX96: encodeSqrtRatioX96({ amount1: BigInt.ONE, amount0: BigInt.ONE }),
           liquidity: BigInt.ZERO,
@@ -149,7 +149,7 @@ describe('Pool', () => {
       const noError = (): void => {
         createPool({
           tokenA: USDC,
-          tokenB: _getWETH(ChainId.MAINNET),
+          tokenB: getWrappedNative({ chainId: ChainId.MAINNET }),
           fee: FeeAmount.HIGH,
           sqrtRatioX96: encodeSqrtRatioX96({ amount1: BigInt.ONE, amount0: BigInt.ONE }),
           liquidity: BigInt.ZERO,
@@ -325,7 +325,7 @@ describe('Pool', () => {
           tickCurrent: 0,
           ticks: [],
         });
-        poolPriceOf({ token: _getWETH(ChainId.MAINNET), pool: pool });
+        poolPriceOf({ token: getWrappedNative({ chainId: ChainId.MAINNET }), pool: pool });
       };
       expect(error).toThrow("TOKEN: Cannot return the price of a token that is not in the pool");
     });
@@ -370,7 +370,7 @@ describe('Pool', () => {
       });
       expect(poolInvolvesToken({ token: USDC, pool: pool })).toStrictEqual(true);
       expect(poolInvolvesToken({ token: DAI, pool: pool })).toStrictEqual(true);
-      expect(poolInvolvesToken({ token: _getWETH(ChainId.MAINNET), pool: pool })).toStrictEqual(false);
+      expect(poolInvolvesToken({ token: getWrappedNative({ chainId: ChainId.MAINNET }), pool: pool })).toStrictEqual(false);
     });
   });
 
