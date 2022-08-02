@@ -1,0 +1,19 @@
+[package]
+name = "seed-content"
+version = "0.1.0"
+authors = ["Jovansonlee Cesar <ivanceras@gmail.com>"]
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+forum-app = { path = "../forum-app" }
+wasm-bindgen = { version = "0.2.81", features = ["serde-serialize"] }
+wasm-bindgen-futures = { version = "0.4.31"}
+console_error_panic_hook = "0.1.7"
+console_log = "0.2.0"
+log = "0.4.17"
+anyhow = "1.0.58"
+serde_json = "1.0.82"
+codec = { package = "parity-scale-codec", version = "3.0.0", features = ['derive'] }

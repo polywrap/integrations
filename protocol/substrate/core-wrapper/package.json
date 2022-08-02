@@ -1,0 +1,27 @@
+{
+  "scripts": {
+    "codegen": "npx polywrap codegen",
+    "build": "npx polywrap build -v",
+    "build:check": "yarn codegen && cd module && cargo check && cargo build --release --target wasm32-unknown-unknown",
+    "fmt": "cd module && cargo +nightly fmt",
+    "test": "yarn test:e2e",
+    "test:e2e": "yarn test:e2e:codegen && jest --passWithNoTests --runInBand --verbose",
+    "test:e2e:codegen": "cd tests && npx polywrap app codegen -g wrap",
+    "clean": "rm -rf module/src/wrap && rm -rf test/wrap",
+    "rebuild": "yarn clean && yarn codegen && yarn build",
+    "deploy": "npx polywrap deploy",
+    "infra":"npx polywrap infra up --modules=eth-ens-ipfs -v"
+  },
+  "dependencies": {
+    "polywrap": "0.2.0"
+  },
+  "devDependencies": {
+    "@types/jest": "27.0.2",
+    "@polywrap/client-js": "0.2.0",
+    "@polywrap/test-env-js": "0.2.0",
+    "jest": "27.0.6",
+    "ts-jest": "27.0.4",
+    "ts-node": "8.10.2",
+    "typescript": "4.0.7"
+  }
+}

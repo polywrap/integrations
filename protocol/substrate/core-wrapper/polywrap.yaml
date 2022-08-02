@@ -1,0 +1,6 @@
+format: 0.1.0
+name: substrate-core
+language: wasm/rust
+schema: ./module/schema.graphql
+module: ./module/Cargo.toml
+deploy: ./polywrap.deploy.yaml

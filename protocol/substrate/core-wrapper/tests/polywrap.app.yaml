@@ -1,0 +1,4 @@
+format: 0.1.0
+name: substrate-core-test
+language: app/typescript
+schema: ./schema.graphql

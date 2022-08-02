@@ -1,0 +1,69 @@
+#import { Module, Request, Header, UrlParam, Response, } into Http from "wrap://ens/http.polywrap.eth"
+
+type Module {
+
+  chainGetMetadata(url: String!): ChainMetadata
+  
+  blockHash(url: String!, number: UInt32!): String
+
+  genesisHash(url: String!): String
+
+  chainGetBlock(url: String!, number: UInt32!): BlockOutput
+
+  constant(url: String!, pallet: String!, name: String!): [UInt8!]
+
+  getRuntimeVersion(url: String!): RuntimeVersion
+
+  getStorageValue(url: String!, pallet: String!, storage: String!): [UInt8!]
+
+  getStorageMap(url: String!, pallet: String!, storage: String!, key: JSON!): [UInt8!]
+
+  getStorageMapPaged(url: String!, pallet: String!, storage: String!, count: UInt32!, nextTo: JSON): [[UInt8!]!]
+
+  rpcMethods(url: String!): [String!]
+
+  accountInfo(url: String!, account: String!): AccountInfo
+
+  getNonceForAccount(url: String!, account: String!): UInt32
+
+  palletCallIndex(url: String!, pallet: String!, call: String!): [UInt8!]
+
+  authorSubmitExtrinsic(url: String!, extrinsic: String!): String
+
+}
+
+type ChainMetadata {
+  metadata: JSON!
+  pallets: JSON!
+  events: JSON!
+  errors: JSON!
+}
+
+type BlockOutput {
+  block: JSON!
+}
+
+type AccountData{
+    free: BigNumber!,
+    reserved: BigNumber!,
+    misc_frozen: BigNumber!,
+    fee_frozen: BigNumber!,
+}
+
+type AccountInfo {
+    nonce: UInt32!,
+    consumers: UInt32!,
+    providers: UInt32!,
+    sufficients: UInt32!,
+    data: AccountData!
+}
+
+type RuntimeVersion {
+    spec_name: String!,
+    impl_name: String!,
+    authoring_version: UInt32!,
+    spec_version: UInt32!,
+    impl_version: UInt32!,
+    transaction_version: UInt32!,
+    state_version: UInt8!,
+}

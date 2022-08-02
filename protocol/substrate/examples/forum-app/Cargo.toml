@@ -1,0 +1,34 @@
+[package]
+name = "forum-app"
+version = "0.1.0"
+authors = ["Jovansonlee Cesar <ivanceras@gmail.com>"]
+edition = "2021"
+
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+async-recursion = "1.0.0"
+console_error_panic_hook = "0.1.7"
+console_log = "0.2.0"
+codec = { package = "parity-scale-codec", version = "3.0.0", features = ['derive'] }
+js-sys = "0.3.58"
+log = "0.4.17"
+sauron = "0.50.3"
+serde_json = "1.0.82"
+serde = "1"
+wasm-bindgen = { version = "0.2.81", features = ["serde-serialize"] }
+wasm-bindgen-futures = { version = "0.4.31"}
+frame-support = { default-features = false, version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v0.9.24", features = ["std"]}
+sp-core = { version = "6.0.0", default-features = false, features = ["full_crypto", "impl-serde"], git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v0.9.24" }
+getrandom = { version = "0.2.7", features = ["js"] }
+thiserror = "1.0.31"
+anyhow = "1.0.58"
+chrono = { version = "0.4.19", features = ["wasmbind"] }
+derive_more = "0.99.17"
+# We need this as a standin for signer-provider
+sp-keyring = { version = "6.0.0", default-features = false, git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v0.9.24" }
+sp-runtime = { version = "6.0.0", default-features = false, git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v0.9.24" }
+sp-std = { version = "4.0.0-dev", default-features = false, git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v0.9.24" }
+hex = "0.4.3"

@@ -1,0 +1,25 @@
+{
+  "name": "forum-app",
+  "description": "A forum app backed by a blockchain",
+  "version": "0.0.1",
+  "license": "(MIT AND Apache-2.0)",
+  "scripts": {
+    "build:app": "wasm-pack build --release --target web",
+    "build": "yarn build:app && cp -r ./pkg ./dist/",
+    "start": "yarn build && parcel index.html",
+    "fmt": "cargo +nightly fmt",
+    "clean": "rm -rf node_modules && rm -rf dist cargo clean"
+  },
+  "devDependencies": {
+    "parcel-bundler": "~1.12.5",
+    "@types/jest": "27.0.2",
+    "@polywrap/client-js": "0.2.0",
+    "@polywrap/test-env-js": "0.2.0"
+  },
+  "dependencies": {
+    "polywrap": "0.2.0",
+    "@polywrap/ipfs-plugin-js": "0.2.0",
+    "@polywrap/ethereum-plugin-js": "0.2.0",
+    "@polywrap/ens-resolver-plugin-js": "0.2.0"
+  }
+}

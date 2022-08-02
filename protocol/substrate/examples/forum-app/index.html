@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+        <meta name="referrer" content="origin"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" type="text/css" href="style.css"/>
+        <title>Y forum</title>
+        <script src="index.ts"></script>
+    </head>
+    <body>
+    <script type=module>
+        import init,{startup} from "./pkg/forum_app.js"
+        await init().catch(console.err);
+        await startup().catch(console.err);
+    </script>
+    </body>
+</html>
