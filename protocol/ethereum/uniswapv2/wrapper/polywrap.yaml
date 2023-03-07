@@ -1,6 +1,0 @@
-format: 0.1.0
-name: uniswap-v2
-language: wasm/assemblyscript
-deploy: ./polywrap.deploy.yaml
-module: ./src/index.ts
-schema: ./src/schema.graphql
